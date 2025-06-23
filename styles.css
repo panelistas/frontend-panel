@@ -1,0 +1,197 @@
+/*======================================
+  styles.css
+  Hojas de estilo pulida para "Constelaciones del Zodiaco"
+  Incluye:
+    - Reset y configuración global
+    - Fondo con degradado y patrón de estrellas
+    - Grid responsive de cartas de constelaciones
+    - Efectos hover en cartas
+    - Modal con animaciones
+    - Estilos de imagen de constelación
+    - Keyframes y media queries
+  ======================================*/
+
+/*--------------------------------------
+  1. Reset y configuración global
+---------------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Evita scroll si hay estrellas fuera de vista */
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0c0c2a 0%, #1a1a3e 50%, #2d1b69 100%);
+  color: #fff;
+  position: relative;
+}
+body {
+  overflow-x: hidden;
+  text-align: center;
+}
+h1 {
+  color: #ffc107;
+  font-size: 2.5rem;
+  margin: 2rem;
+}
+
+/*--------------------------------------
+  2. Patrón de estrellas de fondo
+---------------------------------------*/
+#stars-container {
+  position: fixed;    /* Fijo al fondo */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Clicks pasan a través */
+  overflow: hidden;
+  z-index: -1;
+}
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.8;
+  box-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+/*--------------------------------------
+  3. Grid de cartas de constelaciones
+---------------------------------------*/
+.constellation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+.card {
+  background-color: #1a237e;
+  border: 1px solid #3f51b5;
+  border-radius: 10px;
+  padding: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(255, 193, 7, 0.3);
+}
+.card img {
+  max-width: 100%;
+  height: 120px;
+  border-radius: 5px;
+}
+.card p {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/*--------------------------------------
+  4. Modal de información
+---------------------------------------*/
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background-color: #1a237e;
+  margin: auto;
+  padding: 30px;
+  border: 1px solid #ffc107;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+  animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.modal-content h2 {
+  color: #ffc107;
+  margin-top: 0;
+}
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 28px;
+  color: #aaa;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.close-button:hover,
+.close-button:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
+/*--------------------------------------
+  5. Estilo de imagen de constelación
+---------------------------------------*/
+.constellation-image {
+  width: 200px;
+  height: 200px;
+  margin: 20px auto;
+  border: 2px solid #ffd700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 0, 0.1) 0%,
+    rgba(255, 215, 0, 0.05) 100%
+  );
+  overflow: hidden;
+}
+.modal-content .constellation-image img {
+  width: 100%;
+  height: auto;
+}
+
+/*--------------------------------------
+  6. Media queries
+---------------------------------------*/
+@media (max-width: 600px) {
+  .constellation-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .modal-content {
+    padding: 20px;
+  }
+  .modal-content {
+    width: 90%;
+  }
+}
+
+/*======================================
+  FIN de styles.css
+======================================*/

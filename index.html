@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Constelaciones del Zodiaco</title>
+    <script src="script.js" defer></script>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="star-pattern" id="starPattern"></div>
+    <div class="stars-container">
+      <h1>Constelaciones del Zodiaco</h1>
+
+      <div class="constellation-grid">
+        <div class="card" data-name="Aries">
+          <img src="img/Aries.jpg" alt="Constelación de Aries" />
+          <p>Aries</p>
+        </div>
+        <div class="card" data-name="Tauro">
+          <img src="img/Tauro.jpg " alt="Constelación de Tauro" />
+          <p>Tauro</p>
+        </div>
+        <div class="card" data-name="Geminis">
+          <img src="img/Geminis.jpg" alt="Constelación de Géminis" />
+          <p>Géminis</p>
+        </div>
+        <div class="card" data-name="Cancer">
+          <img src="img/Cancer.jpg" alt="Constelación de Cáncer" />
+          <p>Cáncer</p>
+        </div>
+        <div class="card" data-name="Leo">
+          <img src="img/Leo.jpg" alt="Constelación de Leo" />
+          <p>Leo</p>
+        </div>
+        <div class="card" data-name="Virgo">
+          <img src="img/Virgo.jpg" alt="Constelación de Virgo" />
+          <p>Virgo</p>
+        </div>
+        <div class="card" data-name="Libra">
+          <img src="img/Libra.jpg" alt="Constelación de Libra" />
+          <p>Libra</p>
+        </div>
+        <div class="card" data-name="Escorpio">
+          <img src="img/Escorpio.jpg" alt="Constelación de Escorpio" />
+          <p>Escorpio</p>
+        </div>
+        <div class="card" data-name="Sagitario">
+          <img src="img/Sagitario.jpg" alt="Constelación de Sagitario" />
+          <p>Sagitario</p>
+        </div>
+        <div class="card" data-name="Capricornio">
+          <img src="img/Capricornio.jpg" alt="Constelación de Capricornio" />
+          <p>Capricornio</p>
+        </div>
+        <div class="card" data-name="Acuario">
+          <img src="img/Acuario.jpg" alt="Constelación de Acuario" />
+          <p>Acuario</p>
+        </div>
+        <div class="card" data-name="Piscis">
+          <img src="img/Piscis.jpg" alt="Constelación de Piscis" />
+          <p>Piscis</p>
+        </div>
+        <div class="card" data-name="Luna">
+          <img src="img/Luna.jpg" alt="Luna" />
+          <p>Luna</p>
+        </div>
+        <div class="card" data-name="Marte">
+          <img src="img/Marte.jpg" alt=" Planeta Marte" />
+          <p>Marte</p>
+        </div>
+        <div class="card" data-name="Sol">
+          <img src="img/Sol.jpg" alt="Constelación de Sol" />
+          <p>Sol</p>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div id="infoModal" class="modal">
+        <div class="modal-content">
+          <span id="closeModal" class="close-button">&times;</span>
+          <h2 id="modalTitle"></h2>
+          <img id="modalImage" src="" alt="" />
+          <p id="modalDescription"></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
