@@ -20,9 +20,10 @@ socket.on("open-constellation", ({ name }) => {
   }
 
   // Rellenar modal
-  modalTitle.textContent = name;
+  modalTitle.textContent = info.nombre;
   modalImage.src = info.img;
-  modalImage.alt = `Imagen de ${name}`;
+  modalImage.alt = `Imagen de ${info.nombre}`;
+  modalEstrellas.textContent = info.estrellas_principales;
   modalDesc.textContent = info.data;
   infoModal.style.display = "flex";
 });
@@ -31,52 +32,137 @@ socket.on("open-constellation", ({ name }) => {
 
 const constellationData = {
   ari: {
-    data: "Aries, el carnero, es una constelación del hemisferio norte. Su estrella más brillante es Hamal. Es visible principalmente durante la primavera en el hemisferio norte y el otoño en el sur. Simboliza el comienzo y la energía.",
+    nombre: "Aries",
     img: "img/Aries.jpg",
+    otros_nombres: ["Carnero"],
+    ubicacion: "hemisferio norte",
+    estrellas_principales: ["Alpha Arietis", "Beta Arietis", "Gamma Arietis"],
+    data: "Situada entre Piscis y Tauro, asociada al liderazgo, la energía y la iniciativa. Es una constelación de tamaño medio con un total de 67 estrellas, incluyendo dos galaxias interesantes. El Sol la atraviesa aproximadamente entre el 19 de abril y el 13 de mayo.",
   },
   tau: {
-    data: "Tauro, el toro, es una constelación grande y prominente. Contiene el cúmulo estelar de las Pléyades y la estrella gigante roja Aldebarán. Se asocia con la fuerza y la determinación.",
+    nombre: "Tauro",
     img: "img/Tauro.jpg",
+    otros_nombres: ["Toro"],
+    ubicacion: "hemisferio norte",
+    estrellas_principales: ["Aldebarán", "Elnath", "Alcíone", "Tianguan"],
+    data: "Conocida por sus lluvias de meteoritos, situada entre Aries y Géminis con un total de 223 estrellas. La 'V' de Tauro se forma por varias estrellas prominentes. Tiene muchos objetos interesantes, entre ellos una colección de cientos de estrellas.",
   },
   gem: {
-    data: "Géminis representa a los gemelos Cástor y Pólux, que son sus dos estrellas más brillantes. Es fácil de encontrar en el cielo invernal del hemisferio norte. Simboliza la dualidad y la comunicación.",
+    nombre: "Géminis",
     img: "img/Geminis.jpg",
+    otros_nombres: ["Gemelos"],
+    ubicacion: "hemisferio norte",
+    estrellas_principales: [
+      "Cástor",
+      "Pollux",
+      "Alhena",
+      "Mebsuta",
+      "Tejat Posterior",
+      "Tejat Prior",
+      "Alzirr",
+      "Wasat",
+    ],
+    data: "Representa a dos gemelos, con sus estrellas más brillantes marcando las cabezas. Tiene 119 estrellas y está entre Tauro y Cáncer. El Sol pasa frente a ella entre el 21 de junio y el 20 de julio.",
   },
-  can: {
-    data: "Cáncer, el cangrejo, es una de las constelaciones más tenues del zodiaco. Contiene el cúmulo abierto del Pesebre (M44), visible a simple vista en cielos oscuros. Se asocia con la sensibilidad y el hogar.",
+  cnc: {
+    nombre: "Cáncer",
     img: "img/Cancer.jpg",
+    otros_nombres: ["Cangrejo"],
+    ubicacion: "hemisferio norte",
+    estrellas_principales: [
+      "Alpha Cancri",
+      "Beta Cancri",
+      "Delta Cancri",
+      "Lota Cancri",
+      "Zeta Cancri",
+    ],
+    data: "La más tenue de las 12 constelaciones. Tiene forma de 'Y' invertida y está entre Géminis y Leo con 104 estrellas. Se ve mejor en invierno, desde finales de otoño hasta primavera.",
   },
   leo: {
-    data: "Leo, el león, es una de las constelaciones más reconocibles, con una forma que recuerda a un león agazapado. Su estrella más brillante es Regulus. Es un símbolo de poder y nobleza.",
+    nombre: "Leo",
     img: "img/Leo.jpg",
+    otros_nombres: ["León"],
+    ubicacion: "hemisferio norte",
+    estrellas_principales: ["Regulus", "Denébola"],
+    data: "Contiene muchas galaxias y está entre Cáncer y Virgo. Tiene 123 estrellas. El Sol la ocupa entre el 23 de julio y el 22 de agosto. Se la clasifica como signo de fuego y de baja calidad.",
   },
   vir: {
-    data: "Virgo es la segunda constelación más grande del cielo. Su estrella más brillante es Spica. Alberga una gran cantidad de galaxias, incluido el Cúmulo de Virgo. Representa la pureza y la agricultura.",
+    nombre: "Virgo",
     img: "img/Virgo.jpg",
+    otros_nombres: ["Virgen"],
+    ubicacion: "mayormente en el hemisferio sur",
+    estrellas_principales: ["Spica", "Zavijaba", "Porrima"],
+    data: "La constelación más grande del zodiaco, ubicada entre Leo y Libra. Tiene 169 estrellas y se la asocia con la diosa griega de la justicia.",
   },
   lib: {
-    data: "Libra, la balanza, es la única constelación del zodiaco que no representa a un ser vivo. Originalmente, sus estrellas formaban parte de las pinzas de Escorpio. Simboliza el equilibrio y la justicia.",
+    nombre: "Libra",
     img: "img/Libra.jpg",
+    otros_nombres: ["Balanza"],
+    ubicacion: "hemisferio sur",
+    estrellas_principales: ["Alpha Librae", "Beta Librae", "Gamma Librae"],
+    data: "Poco luminosa, sin estrellas de primera magnitud. Está entre Virgo y Escorpio, con 83 estrellas. Se consideraba la balanza de la diosa de la justicia representada por Virgo.",
   },
-  esc: {
-    data: "Escorpio, el escorpión, es una constelación brillante y fácil de identificar por su forma de gancho. Su corazón es la supergigante roja Antares. Se asocia con la pasión y la transformación.",
+  sco: {
+    nombre: "Escorpio",
     img: "img/Escorpio.jpg",
+    otros_nombres: ["Escorpión"],
+    ubicacion: "hemisferio sur",
+    estrellas_principales: [
+      "Graffias",
+      "Dschubba",
+      "Alniyat",
+      "Antares",
+      "Sargas",
+      "Lesath",
+      "Shaula",
+    ],
+    data: "Famosa por estrellas brillantes como Antares. Situada entre Libra y Sagitario con 27 estrellas. Su forma curva se asemeja a un anzuelo.",
   },
-  sag: {
-    data: "Sagitario, el arquero, se encuentra en la parte más densa de la Vía Láctea, hacia el centro de nuestra galaxia. Tiene una forma que recuerda a una tetera. Simboliza la aventura y la filosofía.",
+  sgr: {
+    nombre: "Sagitario",
     img: "img/Sagitario.jpg",
+    otros_nombres: ["Arquero"],
+    ubicacion: "hemisferio sur",
+    estrellas_principales: [
+      "Kaus Australis",
+      "Rukbat",
+      "Arkab",
+      "Arkab Prior",
+      "Arkab Posterior",
+      "Gamma Sagittari",
+    ],
+    data: "Contiene el centro galáctico. Entre Escorpio y Capricornio con solo 8 estrellas. Ayuda a determinar el centro de rotación del sistema solar.",
   },
   cap: {
-    data: "Capricornio, la cabra marina, es una de las constelaciones más antiguas identificadas. Aunque es relativamente tenue, tiene una forma triangular distintiva. Representa la ambición y la disciplina.",
+    nombre: "Capricornio",
     img: "img/Capricornio.jpg",
+    otros_nombres: ["Cabra"],
+    ubicacion: "hemisferio sur",
+    estrellas_principales: ["Deneb Algedi", "Dabih", "Algedi"],
+    data: "La segunda constelación más tenue. Entre Sagitario y Acuario, tiene 81 estrellas. Representa un ser mitad cabra, mitad pez.",
   },
-  acu: {
-    data: "Acuario, el portador de agua, es una constelación grande pero con estrellas poco brillantes. Se encuentra en una región del cielo a menudo llamada 'el Mar' por la cantidad de constelaciones acuáticas. Simboliza la innovación y la humanidad.",
+  aqr: {
+    nombre: "Acuario",
     img: "img/Acuario.jpg",
+    otros_nombres: ["Portador de agua"],
+    ubicacion: "hemisferio sur",
+    estrellas_principales: [
+      "Sadalsud",
+      "Sadalmelik",
+      "Sadalachbiah",
+      "Albala",
+      "Ancha",
+      "Situla",
+    ],
+    data: "El Sol entra el 16 de febrero y sale el 11 de marzo. Está entre Capricornio y Piscis con 56 estrellas. Ha sido identificado con varios personajes históricos.",
   },
-  pis: {
-    data: "Piscis, los peces, es una constelación tenue que representa a dos peces unidos por una cuerda. Se encuentra entre Acuario y Aries. Se asocia con la intuición, la compasión y el arte.",
+  psc: {
+    nombre: "Piscis",
     img: "img/Piscis.jpg",
+    otros_nombres: ["Peces"],
+    ubicacion: "hemisferio norte",
+    estrellas_principales: ["Alrescha", "Gamma Piscium", "Kullat Nunu"],
+    data: "Representa dos peces unidos por una cuerda. Entre Acuario y Aries, con 45 estrellas. Aunque es antigua y grande, tiene pocas estrellas con nombres propios.",
   },
 };
 
@@ -157,18 +243,18 @@ window.addEventListener("click", (event) => {
 //   });
 // });
 
-function showConstellation(name) {
-  const info = constellationData[name];
-  if (!info) {
-    console.warn(`No hay datos para "${name}"`);
-    return;
-  }
-  modalTitle.textContent = name;
-  modalImage.src = info.img;
-  modalImage.alt = `Imagen de ${name}`;
-  modalDesc.textContent = info.data;
-  infoModal.style.display = "flex";
-}
+// function showConstellation(name) {
+//   const info = constellationData[name];
+//   if (!info) {
+//     console.warn(`No hay datos para "${name}"`);
+//     return;
+//   }
+//   modalTitle.textContent = name.nombre;
+//   modalImage.src = info.img;
+//   modalImage.alt = `Imagen de ${name}`;
+//   modalDesc.textContent = info.data;
+//   infoModal.style.display = "flex";
+// }
 
 //--------------------------------------
 // 5. Inicialización al cargar la página
