@@ -12,20 +12,35 @@ socket.on("connect", () => {
 
 // Cuando llegue la orden de abrir una constelación...
 socket.on("open-constellation", ({ name }) => {
+  console.log(name);
+
   // Reutilizamos el mismo código que usamos en el click de la card:
   const info = constellationData[name];
   if (!info) {
     console.warn(`No hay datos para: ${name}`);
-    return;
+    name = "desc";
+
+    // return;
   }
 
-  // Rellenar modal
-  modalTitle.textContent = info.nombre;
-  modalImage.src = info.img;
-  modalImage.alt = `Imagen de ${info.nombre}`;
-  modalEstrellas.textContent = info.estrellas_principales;
-  modalDesc.textContent = info.data;
-  infoModal.style.display = "flex";
+  if (name != "desc") {
+    const estrellasPrincipales = info.estrellas_principales.join(", ") + ".";
+
+    infoModalInfo.classList.add("hidden");
+    infoModal.classList.remove("hidden");
+    // Rellenar modal
+    modalTitle.textContent = info.nombre;
+    modalImage.src = info.img;
+    modalImage.alt = `Imagen de ${info.nombre}`;
+    modalEstrellas.textContent = estrellasPrincipales;
+    modalDesc.textContent = info.data;
+    infoModalInfo.style.display = "flex";
+  } else {
+    infoModal.classList.add("hidden");
+    infoModalInfo.classList.remove("hidden");
+
+    infoModalInfo.style.display = "flex";
+  }
 });
 
 // constellationData.js
@@ -195,6 +210,113 @@ function initStarPattern(count = 100) {
   }
 }
 
+function createShootingStar() {
+  const container = document.getElementById("starPattern");
+  const W = window.innerWidth;
+  const H = window.innerHeight;
+
+  const startX = Math.random() * W;
+  const startY = Math.random() * H * 0.4;
+
+  const angleDeg = Math.random() * 30 + 20;
+  const angleRad = (angleDeg * Math.PI) / 180;
+  const distance = Math.random() * 300 + 300;
+  const dx = distance * Math.cos(angleRad);
+  const dy = distance * Math.sin(angleRad);
+
+  // Duración aleatoria: entre 800 ms y 2000 ms
+  const duration = Math.random() * (2000 - 800) + 800;
+
+  const star = document.createElement("div");
+  star.style.cssText = `
+    position: absolute;
+    top: ${startY}px;
+    left: ${startX}px;
+    width: ${distance}px;
+    height: 2px;
+    background: linear-gradient(to left, rgba(255,255,255,0.9), rgba(255,255,255,0));
+    transform: rotate(${angleDeg}deg);
+    transform-origin: top left;
+    pointer-events: none;
+    opacity: 0.8;
+  `;
+  container.appendChild(star);
+
+  star.animate(
+    [
+      { transform: `translate(0, 0) rotate(${angleDeg}deg)`, opacity: 0.8 },
+      {
+        transform: `translate(${dx}px, ${dy}px) rotate(${angleDeg}deg)`,
+        opacity: 0,
+      },
+    ],
+    {
+      duration, // uso de la duración aleatoria
+      easing: "ease-out",
+    }
+  ).onfinish = () => star.remove();
+}
+
+function startShootingStars() {
+  const delay = Math.random() * 5000 + 10000;
+  setTimeout(() => {
+    createShootingStar();
+    startShootingStars();
+  }, delay);
+}
+
+initStarPattern(100);
+startShootingStars();
+
+/**
+ * Genera una estrella estática (igual que en initStarPattern)
+ * pero con una animación infinita de deriva horizontal.
+ */
+function createDriftingStar() {
+  const container = document.getElementById("starPattern");
+  const W = window.innerWidth;
+  const H = window.innerHeight;
+
+  const size = Math.random() * 2 + 1; // 1px–3px
+  const startY = Math.random() * H; // posición vertical aleatoria
+  const startX = -size; // arrancamos justo fuera del borde izquierdo
+  const endX = W + size; // terminamos fuera del borde derecho
+
+  // crear el div
+  const star = document.createElement("div");
+  star.style.cssText = `
+    position: absolute;
+    top: ${startY}px;
+    left: ${startX}px;
+    width: ${size}px;
+    height: ${size}px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+  `;
+  container.appendChild(star);
+
+  // animar de izquierda a derecha (y repetir infinitamente)
+  const duration = Math.random() * 60000 + 30000; // 30–90s para que unas sean más lentas
+  star.animate(
+    [
+      { transform: `translateX(0)` },
+      { transform: `translateX(${endX - startX}px)` },
+    ],
+    {
+      duration,
+      iterations: Infinity,
+      easing: "linear",
+    }
+  );
+}
+
+// Primero pinta tus 100 estrellas estáticas…
+initStarPattern(100);
+// …y luego pon en marcha la que se mueve despacito
+createDriftingStar();
+
 //--------------------------------------
 // 3. Control del modal de información
 //--------------------------------------
@@ -204,6 +326,8 @@ const closeModal = document.getElementById("closeModal");
 const modalTitle = document.getElementById("modalTitle");
 const modalImage = document.getElementById("modalImage");
 const modalDesc = document.getElementById("modalDescription");
+
+const infoModalInfo = document.getElementById("infoModal-info");
 
 // Cierra el modal al hacer click en la X\
 closeModal.addEventListener("click", () => {
@@ -216,45 +340,6 @@ window.addEventListener("click", (event) => {
     infoModal.style.display = "none";
   }
 });
-
-//--------------------------------------
-// 4. Eventos de click en las cartas
-//--------------------------------------
-// Asigna un listener a cada .card para abrir el modal con la info correspondiente
-
-// document.querySelectorAll(".card").forEach((card) => {
-//   card.addEventListener("click", () => {
-//     const name = card.dataset.name; // nombre de la constelación
-//     const info = constellationData[name]; // datos del objeto correspondiente
-
-//     if (!info) {
-//       console.warn(`Info no disponibleeee para: ${name}`);
-//       return;
-//     }
-
-//     // Rellenar modal
-//     modalTitle.textContent = name;
-//     modalImage.src = info.img;
-//     modalImage.alt = `Imagen de ${name}`;
-//     modalDesc.textContent = info.data;
-
-//     // Mostrar modal en flex para centrar contenido
-//     infoModal.style.display = "flex";
-//   });
-// });
-
-// function showConstellation(name) {
-//   const info = constellationData[name];
-//   if (!info) {
-//     console.warn(`No hay datos para "${name}"`);
-//     return;
-//   }
-//   modalTitle.textContent = name.nombre;
-//   modalImage.src = info.img;
-//   modalImage.alt = `Imagen de ${name}`;
-//   modalDesc.textContent = info.data;
-//   infoModal.style.display = "flex";
-// }
 
 //--------------------------------------
 // 5. Inicialización al cargar la página

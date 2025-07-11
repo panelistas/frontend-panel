@@ -64,17 +64,44 @@
         </div>
       </div>
 
-      <!-- Modal -->
-      <div id="infoModal" class="modal">
+      <!-- Modal constelaciones -->
+      <div id="infoModal" class="modal hidden">
         <div class="modal-content">
           <span id="closeModal" class="close-button">&times;</span>
           <h2 id="modalTitle"></h2>
-          <img id="modalImage" src="" alt="" />
-          <h3>Estrellas Principales:</h3>
-          <h3 id="modalEstrellas">Estrellas Principales:</h3>
+          <img id="modalImage" class="constelation-img" src="" alt="" />
+          <h3>Estrellas principales:</h3>
+          <h3 id="modalEstrellas"></h3>
           <p id="modalDescription"></p>
         </div>
       </div>
+      <!-- Modal informacion -->
+      <div id="infoModal-info" class="modal hidden">
+        <div class="modal-content">
+          <span class="close-button">&times;</span>
+          <h2>Descripción del proyecto</h2>
+          <img class="modal-info-img" src="img/funcionamiento.jpg" alt="" />
+          <h3></h3>
+          <p id="">
+            Este proyecto es un sistema interactivo que permite a los usuarios
+            explorar las constelaciones zodiacales mediante una interfaz táctil.
+          </p>
+          <p>
+            A través de una tablet, el usuario selecciona una de las doce
+            constelaciones del zodíaco, y el sistema automáticamente dirige un
+            puntero láser hacia la posición correspondiente en el cielo.
+          </p>
+          <p>
+            Simultáneamente, se proyecta en una página web con información sobre
+            la constelación elegida.
+          </p>
+        </div>
+      </div>
+      <!-- desc: {
+    nombre: "",
+    img: "img/funcionamiento.jpg",
+    data: "",
+  } -->
     </div>
   </body>
 </html>
